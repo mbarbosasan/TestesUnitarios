@@ -1,27 +1,40 @@
 package services;
 
+import br.ce.wcaquino.dao.LocacaoDAO;
 import br.ce.wcaquino.entidades.Filme;
 import br.ce.wcaquino.entidades.Locacao;
 import br.ce.wcaquino.entidades.Usuario;
 import br.ce.wcaquino.servicos.LocacaoService;
+import br.ce.wcaquino.servicos.SPCService;
 import br.ce.wcaquino.servicos.exceptions.FilmeSemEstoqueException;
 import br.ce.wcaquino.servicos.exceptions.LocadoraException;
+import builder.FilmeBuilder;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+import static builder.FilmeBuilder.umFilme;
 import static org.hamcrest.CoreMatchers.is;
 
 @RunWith(Parameterized.class)
 public class CalculoValorLocacaoTest {
-
+    @InjectMocks
     private LocacaoService service;
+    @Mock
+    private LocacaoDAO dao;
+    @Mock
+    private SPCService spc;
+
     @Parameterized.Parameter
     public List<Filme> filmes;
     @Parameterized.Parameter(value = 1)
@@ -32,16 +45,15 @@ public class CalculoValorLocacaoTest {
 
     @Before
     public void setup() {
-        service = new LocacaoService();
-
+        MockitoAnnotations.initMocks(this);
     }
 
-    private static Filme filme1 = new Filme("Zumbilandia", 2, 4.00);
-    private static Filme filme2 = new Filme("Odin", 2, 4.00);
-    private static Filme filme3 = new Filme("Questao de Tempo", 2, 4.00);
-    private static Filme filme4 = new Filme("Asgard", 2, 4.00);
-    private static Filme filme5 = new Filme("Frigga", 2, 4.00);
-    private static Filme filme6 = new Filme("Sutur", 2, 4.00);
+    private static Filme filme1 = umFilme().agora();
+    private static Filme filme2 = umFilme().agora();
+    private static Filme filme3 = umFilme().agora();
+    private static Filme filme4 = umFilme().agora();
+    private static Filme filme5 = umFilme().agora();
+    private static Filme filme6 = umFilme().agora();
 
     @Parameterized.Parameters(name = "{2}")
     public static Collection<Object> getParametros() {

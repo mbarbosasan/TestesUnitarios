@@ -11,11 +11,10 @@
       <version>4.12</version>
       <scope>test</scope>
     </dependency>
-
     <dependency>
-      <groupId></groupId>
-      <artifactId></artifactId>
-      <version></version>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <version>3.5.9</version>
     </dependency>
   </dependencies>
   <properties>

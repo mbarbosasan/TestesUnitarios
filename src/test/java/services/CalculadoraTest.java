@@ -5,6 +5,9 @@ import br.ce.wcaquino.servicos.exceptions.NaoPodeDividirPorZeroException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.Spy;
 
 public class CalculadoraTest {
 
@@ -53,6 +56,25 @@ public class CalculadoraTest {
         int b = 0;
 
         calculadora.dividir(a, b);
+    }
+
+    @Test
+    public void deveDividir() {
+        String a = "6";
+        String b = "3";
+
+        int resultado = calculadora.dividir(a, b);
+
+        Assert.assertEquals(2, resultado);
+    }
+
+    @Test
+    public void teste() {
+        Calculadora calc = Mockito.mock(Calculadora.class);
+        Mockito.when(calc.somar(Mockito.anyInt(), Mockito.anyInt())).thenReturn(5);
+
+        System.out.println(calc.somar(1, 8));
+
     }
 
 }
